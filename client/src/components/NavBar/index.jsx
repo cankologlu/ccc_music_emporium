@@ -1,11 +1,15 @@
 import React from "react";
 // import { useCookies } from "react-cookie";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import NotSignedInIcon from "./NotSignedInIcon";
 import SignedInIcon from "./SignedInIcon";
 import CartIcon from "./CartIcon";
 import PageLinks from "./PageLinks";
 import Logo from "./Logo";
+import { ProductContext } from "../../contexts/ProductContext";
+import useAllProducts from "../../hooks/useAllProducts";
+import SearchBar from "../SearchBar";
 
 export default function NavBar() {
 	// const [cookies, setCookie, removeCookie] = useCookies([
@@ -13,6 +17,7 @@ export default function NavBar() {
 	// 	"user_name",
 	// ]);
 	// const user_id = localStorage.getItem("user_id");
+	const { products } = useContext(ProductContext);
 	const user_name = localStorage.getItem("user_name");
 
 	const navigate = useNavigate();
@@ -52,6 +57,9 @@ export default function NavBar() {
 					</ul>
 				</div>
 				<Logo />
+			</div>
+			<div>
+				<SearchBar/>
 			</div>
 			<div className='navbar-center hidden lg:flex'>
 				<ul className='menu menu-horizontal px-1'>
