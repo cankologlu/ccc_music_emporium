@@ -17,7 +17,7 @@ export default function NavBar() {
 	// 	"user_name",
 	// ]);
 	// const user_id = localStorage.getItem("user_id");
-	const { products } = useContext(ProductContext);
+	const { products, setProducts } = useAllProducts();
 	const user_name = localStorage.getItem("user_name");
 
 	const navigate = useNavigate();
@@ -59,7 +59,7 @@ export default function NavBar() {
 				<Logo />
 			</div>
 			<div>
-				<SearchBar/>
+				<SearchBar placeholder={"ananas"} products={products}/>
 			</div>
 			<div className='navbar-center hidden lg:flex'>
 				<ul className='menu menu-horizontal px-1'>
