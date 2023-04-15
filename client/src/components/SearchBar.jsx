@@ -21,7 +21,7 @@ export default function SearchBar ({placeholder, products}) {
       </div>
       <div className="dataResults">
         {products.products.map((value, key) => {
-          return <div>{value.model}</div>
+          return <a className = "dataItem">{value.model}</a>
         })}
       </div>
 
