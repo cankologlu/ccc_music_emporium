@@ -8,23 +8,39 @@ import { Icon } from "@fortawesome/fontawesome-svg-core";
 
 export default function SearchBar ({placeholder, products}) {
   
-  console.log(products.products)
-  
+  const [filteredData, setFilteredData] = useState([]);
+
+  const handleFilter = (e) => {
+   const searchWord = e.target.value
+   const newFilter = products.products.filter((value) => {
+    return value.model.toLowerCase().includes(searchWord.toLowerCase());
+   });
+   if(searchWord === "")
+   {
+    setFilteredData([]);
+   }else {
+     
+     setFilteredData(newFilter);
+   }
+  }
 
   return (
     <div className="search">
-      <div className="searchInputs">
-        <input type="text" placeholder={placeholder}/>
+      <div className="searchInputs  mt-40">
+        <input type="text" placeholder={placeholder} onChange={handleFilter}/>
           <div className="searchIcon">
             <FontAwesomeIcon icon={faSearch}/>
           </div>
       </div>
-      <div className="dataResults">
-        {products.products.map((value, key) => {
-          return <a className = "dataItem">{value.model}</a>
+      { filteredData.length !== 0 && (
+      <div className="dataResults overflow-y-auto h-32 bg-white" >
+        {filteredData.slice(0,5).map((value, key) => {
+          return <a className = "dataItem">
+            <p>{value.model}</p>
+            </a>
         })}
       </div>
-
+      )} 
     </div>
     
   )
